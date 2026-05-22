@@ -61,6 +61,14 @@ public class Videojuego {
 		this.genero = genero;
 	}
 	
+	//metodo toString
+	@Override
+	public String toString() {
+		return "Videojuego [codigo=" + codigo + ", nombre=" + nombre + ", plataforma=" + plataforma + ", precio="
+				+ precio + ", disponible=" + disponible + ", genero=" + genero + "]";
+	}
+	
+	
 	
 	
 
