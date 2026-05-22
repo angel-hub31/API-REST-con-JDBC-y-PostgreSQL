@@ -23,6 +23,44 @@ public class Videojuego {
 		this.genero = genero;
 	}
 	
+	//getters y setters
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getPlataforma() {
+		return plataforma;
+	}
+	public void setPlataforma(String plataforma) {
+		this.plataforma = plataforma;
+	}
+	public double getPrecio() {
+		return precio;
+	}
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+	public boolean isDisponible() {
+		return disponible;
+	}
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+	
 	
 	
 
