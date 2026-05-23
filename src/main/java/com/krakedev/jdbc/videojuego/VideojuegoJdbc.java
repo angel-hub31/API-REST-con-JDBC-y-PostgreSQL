@@ -10,6 +10,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.krakedev.clientes.entidades.Cliente;
 import com.krakedev.jdbc.Conexion;
 import com.krakedev.videojuegos.entidades.Videojuego;
 
@@ -200,7 +201,141 @@ public class VideojuegoJdbc {
 		
 	}
 	
-	
+	public static Videojuego actualizar(String codigo,String nombre, String plataforma,double precio,boolean disponible,String genero) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE videojuegos SET nombre=?, plataforma=?,precio=?,disponible=?,genero=? WHERE codigo=?";
+		ResultSet rs = null;
+		Videojuego videojuego = null;
+		
+		
+		try {
+			con = Conexion.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, nombre);
+			ps.setString(2, plataforma);
+			ps.setDouble(3, precio);
+			ps.setBoolean(4, disponible);
+			ps.setString(5,genero);
+			ps.setString(6, codigo);
+			
+			int fila =ps.executeUpdate();
+			videojuego =new Videojuego (codigo,nombre,plataforma,precio,disponible,genero);
+		
+			if (con != null && !con.getAutoCommit()) {
+				con.commit();
+				log.info("Commit ejecutado con exito en actualizar.");
+			}
+			
+			
+		}catch(Exception e) {
+			log.error("Error al actualizar: ", e);
+			throw new RuntimeException("error al actualizar: " + e.getMessage());
+			
+		}finally {
+			try {
+				if(rs !=null) {
+					rs.close();
+				}
+					
+				
+			}catch(Exception e) {
+				log.error("Error al actualizar: ", e);
+
+				
+			}
+			try {
+				if(ps !=null) {
+					ps.close();
+				}
+					
+				
+			}catch(Exception e) {
+				log.error("Error al actualizar: ", e);
+
+				
+			}
+			try {
+				if(con !=null) {
+					con.close();
+				}
+					
+				
+			}catch(Exception e) {
+				log.error("Error al actualizar: ", e);
+
+				
+			}
+			
+		}
+		return videojuego;
+		
+	}
+	public static boolean eliminar(String codigo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE FROM videojuegos WHERE codigo=?";
+		ResultSet rs = null;
+		
+		try {
+			con = Conexion.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, codigo);
+			int fila =ps.executeUpdate();
+			
+			if (con != null && !con.getAutoCommit()) {
+				con.commit();
+				log.info("Commit ejecutado con éxito al eliminar.");
+			}
+		
+			
+		}catch(Exception e) {
+			log.error("error al eliminar: ", e);
+			throw new RuntimeException("error al eliminar: "+ e.getMessage());
+
+			
+			
+		}finally {
+			try {
+				if(rs !=null) {
+					rs.close();
+					
+				}
+				
+			}catch(Exception e) {
+				log.error("error al eliminar: ", e);
+
+				
+			}
+			try {
+				if(ps !=null) {
+					ps.close();
+					
+				}
+				
+			}catch(Exception e) {
+				log.error("error al eliminar: ", e);
+
+				
+			}
+			try {
+				if(con !=null) {
+					con.close();
+					
+				}
+				
+			}catch(Exception e) {
+				log.error("error al eliminar: ", e);
+
+				
+			}
+			
+		}
+		return true;
+		
+	}
 	
 
 }
