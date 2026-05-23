@@ -133,8 +133,74 @@ public class VideojuegoJdbc {
 	}
 	
 	public static Videojuego buscar(String codigo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "SELECT * FROM videojuegos WHERE codigo=?";
+		ResultSet rs = null;
+		Videojuego videojuego = null;
 		
+		try {
+			con = Conexion.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, codigo);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				videojuego  = new Videojuego(rs.getString("codigo"), rs.getString("nombre"),
+						rs.getString("plataforma"), rs.getDouble("precio"), rs.getBoolean("disponible"),
+						rs.getString("genero"));
+			}
+
+			
+			
+		}catch(Exception e) {
+			log.error("Error al buscar por codigo: ", e);
+			throw new RuntimeException("error al buscar: "+ e.getMessage());
+			
+		}finally {
+			try {
+				if(rs !=null) {
+					rs.close();
+				}
+					
+				
+			}catch(Exception e) {
+				log.error("Error al buscar: ", e);
+
+				
+			}
+			try {
+				if(ps !=null) {
+					ps.close();
+				}
+					
+				
+			}catch(Exception e) {
+				log.error("Error al buscar: ", e);
+
+				
+			}
+			try {
+				if(con !=null) {
+					con.close();
+				}
+					
+				
+			}catch(Exception e) {
+				log.error("Error al buscar: ", e);
+
+				
+			}
+			
+			
+			
+			
+		}
+		return videojuego;
 		
 	}
+	
+	
+	
 
 }
