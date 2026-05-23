@@ -31,6 +31,7 @@ public class VideojuegoJdbcController {
 	}
 	
 	
+	
 	@GetMapping
 	public List<Videojuego>listar(){
 		return servicio.listar();
