@@ -2,7 +2,10 @@ package com.krakedev.jdbc.videojuego;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,45 +17,42 @@ public class VideojuegoJdbc {
 
 	private static final Logger log = LoggerFactory.getLogger(VideojuegoJdbc.class);
 
-	public static Videojuego insertar(String codigo,String nombre,String plataforma,double precio,boolean disponible,String genero) {
-		
+	public static Videojuego insertar(String codigo, String nombre, String plataforma, double precio,
+			boolean disponible, String genero) {
+
 		Connection con = null;
 		PreparedStatement ps = null;
-		Videojuego videojuego=null;
-		
+		Videojuego videojuego = null;
+
 		try {
-			con=Conexion.getConnection();
+			con = Conexion.getConnection();
 			String sql = "INSERT INTO videojuegos(codigo,nombre,plataforma,precio,disponible,genero) VALUES (?,?,?,?,?,?)";
-			
-			ps=con.prepareStatement(sql);
-			
+
+			ps = con.prepareStatement(sql);
+
 			ps.setString(1, codigo);
 			ps.setString(2, nombre);
 			ps.setString(3, plataforma);
 			ps.setDouble(4, precio);
 			ps.setBoolean(5, disponible);
 			ps.setString(6, genero);
-			
-			
-			videojuego=new Videojuego(codigo,nombre,plataforma,precio,disponible,genero);
-			int filas =ps.executeUpdate();
+
+			videojuego = new Videojuego(codigo, nombre, plataforma, precio, disponible, genero);
+			int filas = ps.executeUpdate();
 			log.info("Filas insertadas: " + filas);
-			
+
 			if (con != null && !con.getAutoCommit()) {
 				con.commit();
 				log.info("Commit ejecutado con éxito en videojuegos.");
 			}
 
-			
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error("Error al insertar: ", e);
-			throw new RuntimeException("error al insertar: "+ e.getMessage());
+			throw new RuntimeException("error al insertar: " + e.getMessage());
 
-
-			
-		}finally {
+		} finally {
 			try {
-				if(con !=null) {
+				if (con != null) {
 					con.close();
 
 				}
@@ -61,18 +61,80 @@ public class VideojuegoJdbc {
 				log.error("Error al cerrar la conexión: ", e);
 			}
 			try {
-				if(ps !=null) {
+				if (ps != null) {
 					ps.close();
 
 				}
-	
-			}catch(Exception e) {
+
+			} catch (Exception e) {
 				log.error("Error al cerrar la PreparedStatement: ", e);
-				
+
 			}
-			
+
 		}
 		return videojuego;
+	}
+
+	public static List<Videojuego> listar() {
+		List<Videojuego> videojuego = new ArrayList<>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = Conexion.getConnection();
+			String sql = "SELECT * FROM videojuegos";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Videojuego vj = new Videojuego(rs.getString("codigo"), rs.getString("nombre"),
+						rs.getString("plataforma"), rs.getDouble("precio"), rs.getBoolean("disponible"),
+						rs.getString("genero"));
+
+				videojuego.add(vj);
+
+			}
+
+		} catch (Exception e) {
+			log.error("Error al listar: ", e);
+			throw new RuntimeException("error al listar: " + e.getMessage());
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				log.error("Error al cerrar el ResultSet: ", e);
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				log.error("Error al cerrar el PreparedStatement: ", e);
+			}
+
+			try {
+				if (con != null) {
+					con.close();
+				}
+
+			} catch (Exception e) {
+				log.error("Error al Listar: ", e);
+
+			}
+
+		}
+		return videojuego;
+
+	}
+	
+	public static Videojuego buscar(String codigo) {
+		
+		
 	}
 
 }
