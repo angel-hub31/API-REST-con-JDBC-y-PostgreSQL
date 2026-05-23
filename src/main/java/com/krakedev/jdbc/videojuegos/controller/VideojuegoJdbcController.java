@@ -2,6 +2,7 @@ package com.krakedev.jdbc.videojuegos.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -41,6 +42,10 @@ public class VideojuegoJdbcController {
 	@PutMapping("/{codigo}")
 	public Videojuego actualizar(@PathVariable String codigo,@RequestBody Videojuego videojuego) {
 		return servicio.actualizar(codigo, videojuego);
+	}
+	@DeleteMapping("/{codigo}")
+	public boolean eliminar(@PathVariable String codigo) {
+		return servicio.eliminar(codigo);
 	}
 	
 	
