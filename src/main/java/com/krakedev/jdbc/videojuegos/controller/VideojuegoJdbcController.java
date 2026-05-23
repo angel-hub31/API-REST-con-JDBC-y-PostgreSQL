@@ -15,7 +15,7 @@ import com.krakedev.jdbc.videojuegos.services.ServicioVideojuegoJdbc;
 import com.krakedev.videojuegos.entidades.Videojuego;
 
 @RestController
-@RequestMapping("/jdbc/videojuegos")
+@RequestMapping("/jdbc/videojuego")
 
 public class VideojuegoJdbcController {
 	
