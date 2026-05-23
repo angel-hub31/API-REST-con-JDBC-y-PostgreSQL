@@ -32,5 +32,9 @@ public class ServicioVideojuegoJdbc {
 				videojuegoActualizado.isDisponible(), videojuegoActualizado.getGenero());
 
 	}
+	
+	public boolean eliminar(String codigo) {
+		return VideojuegoJdbc.eliminar(codigo);
+	}
 
 }
