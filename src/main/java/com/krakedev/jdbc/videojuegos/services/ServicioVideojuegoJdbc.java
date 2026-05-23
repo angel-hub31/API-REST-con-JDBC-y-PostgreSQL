@@ -19,6 +19,10 @@ public class ServicioVideojuegoJdbc {
 		return VideojuegoJdbc.listar();
 		
 	}
+	public Videojuego buscarPorCedula(String codigo) {
+		return VideojuegoJdbc.buscar(codigo);
+		
+	}
 	
 	
 	
