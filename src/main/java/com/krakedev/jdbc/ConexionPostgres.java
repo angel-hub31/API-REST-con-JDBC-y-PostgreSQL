@@ -16,7 +16,7 @@ public class ConexionPostgres {
 		Connection con = null;
 
 		try {
-			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tallerjdbc", "postgres", "1004034391");
+			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/videojuegos", "postgres", "1004034391");
 			log.info("¡¡¡Conexion exitosa a vj !!!");
 
 		} catch (SQLException e) {
