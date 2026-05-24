@@ -7,3 +7,4 @@ disponible boolean not null,
 genero varchar (50)
 
 );
+select * from videojuegos;

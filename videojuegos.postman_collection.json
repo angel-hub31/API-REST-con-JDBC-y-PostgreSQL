@@ -1,0 +1,143 @@
+{
+  "info": {
+    "_postman_id": "2e8d68d6-ab02-491e-9c5d-6a954eafb807",
+    "name": "videojuegos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54487337",
+    "_collection_link": "https://go.postman.co/collection/54487337-2e8d68d6-ab02-491e-9c5d-6a954eafb807?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "crear videojuego",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"codigo\":\"VG001\",\r\n\"nombre\":\"Minecraft\",\r\n\"plataforma\":\"PC\",\r\n\"precio\":39.99,\r\n\"disponible\":true,\r\n\"genero\":\"Sandbox\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8091/jdbc/videojuego",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8091",
+          "path": [
+            "jdbc",
+            "videojuego"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "listar videojuego",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8091/jdbc/videojuego",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8091",
+          "path": [
+            "jdbc",
+            "videojuego"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar videojuego",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"codigo\": \"VG003\",\r\n    \"nombre\": \"Call of dutty\",\r\n    \"plataforma\": \"PC y MOBIL\",\r\n    \"precio\": 49.23,\r\n    \"disponible\": true,\r\n    \"genero\": \"guerra\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8091/jdbc/videojuego/VG003",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8091",
+          "path": [
+            "jdbc",
+            "videojuego",
+            "VG003"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "buscar videojuego",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"codigo\": \"VG001\",\r\n    \"nombre\": \"SUPER MARIO\",\r\n    \"plataforma\": \"PC\",\r\n    \"precio\": 33.50,\r\n    \"disponible\": true,\r\n    \"genero\": \"consola\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8091/jdbc/videojuego/VG001",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8091",
+          "path": [
+            "jdbc",
+            "videojuego",
+            "VG001"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "eliminar videojuego",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"codigo\": \"VG001\",\r\n    \"nombre\": \"Super Mario\",\r\n    \"plataforma\": \"PC\",\r\n    \"precio\": 99.99,\r\n    \"disponible\": true,\r\n    \"genero\": \"Consola\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8091/jdbc/videojuego/VG002",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8091",
+          "path": [
+            "jdbc",
+            "videojuego",
+            "VG002"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
